@@ -12,21 +12,10 @@ app.get('/', function (req, res) {
     res.send('This is TestBot Server');
 });
 
-app.get('/forecast', function (req, res) {
-    forecast.get([35.9335, 139.6181], function(err, weather) {
-      if(err) return console.dir(err);
-      console.dir(weather);
-      console.dir(weather.latitude);
-      console.log("weather.latitude " + weather.latitude);
-      console.log("오늘 " + weather.timezone + "의 날씨는 " + weather.currently.summary + "입니다. ");
-    });
-    res.send('forecast');
-});
-
 // Facebook Webhook
 app.get('/webhook', function (req, res) {
     console.log(req.query['hub.verify_token']);
-    if (req.query['hub.verify_token'] === 'testbot_verify_token') {  // webhook 설정에 입력된 토큰
+    if (req.query['hub.verify_token'] === 'abcd_verify_token') {  // webhook 설정에 입력된 토큰
         res.send(req.query['hub.challenge']);
     } else {
         res.send('Invalid verify token');
@@ -40,7 +29,7 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         if (event.message && event.message.text) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
-                sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
+                sendMessage(event.sender.id, {text: event.message.text});
             }
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
