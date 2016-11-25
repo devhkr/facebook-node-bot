@@ -13,14 +13,12 @@ var forecast = new Forecast({
   service: 'darksky',
   key: 'f0ad1b95c9fc6c9d0635c5b8a99f0b06',
   units: 'celcius',
-  cache: true,
-  ttl: {
-    http://momentjs.com/docs/#/durations/creating/ 
+  cache: true,      // Cache API requests 
+  ttl: {            // How long to cache requests. Uses syntax from moment.js: http://momentjs.com/docs/#/durations/creating/ 
     minutes: 27,
     seconds: 45
   }
 });
-
 
 // Server frontpage
 app.get('/', function (req, res) {
