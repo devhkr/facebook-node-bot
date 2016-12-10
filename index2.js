@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
 // Facebook Webhook
 app.get('/webhook', function (req, res) {
     console.log(req.query['hub.verify_token']);
-    if (req.query['hub.verify_token'] === 'abcd_verify_token') {  // webhook 설정에 입력된 토큰
+    if (req.query['hub.verify_token'] === 'abcd_verify_token') {    // webhook 설정에 입력된 토큰
         res.send(req.query['hub.challenge']);
     } else {
         res.send('Invalid verify token');
@@ -90,14 +90,9 @@ function kittenMessage(recipientId, text) {
                   }
               }
           };
-
           sendMessage(recipientId, message);
-
           return true;
       }
   }
-
-  return false;
-    
+  return false; 
 };
-
